@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  },
+  "scripts": {
+    "start-dev": "",
+    "start": "",
+    "build": "tsc",
+    "lint": "",
+    "lint-fix": "",
+    "prettier": "",
+    "prettier-fix": ""
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
