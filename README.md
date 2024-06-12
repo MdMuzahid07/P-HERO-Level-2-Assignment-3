@@ -1,7 +1,9 @@
 # P-HERO-Level-2-Assignment-3
 
-##Technology Stack
+#Technology Stack
 
-#Programming Language: TypeScript<br>
-#Backend Web Framework: Express.js<br>
-#ODM & Validation Library: Mongoose for MongoDB<br>
+<ul>
+  <li>Programming Language: TypeScript<br></li>
+  <li>Backend Web Framework: Express.js<br></li>
+  <li>ODM & Validation Library: Mongoose for MongoDB<br></li>
+</ul>
