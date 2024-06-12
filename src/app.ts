@@ -5,19 +5,16 @@ const app: Application = express();
 
 // parsers
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 
 // application routes
-
-
 
 
 // test route
 app.get('/', function (req: Request, res: Response) {
     res.send("Server running");
 });
-
 
 // global error handler
 // make an global error handler and call here 
