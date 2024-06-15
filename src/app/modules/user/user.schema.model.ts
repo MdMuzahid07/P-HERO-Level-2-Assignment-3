@@ -1,45 +1,29 @@
 import mongoose from 'mongoose'
-import { TName, TUser } from './user.interface'
-
-const UserName = new mongoose.Schema<TName>({
-  firstName: {
-    type: String,
-    required: [true, 'first name is required, please add your first name'],
-  },
-  middleName: {
-    type: String,
-    required: [true, 'middle name is required, please add your middle name'],
-  },
-  lastName: {
-    type: String,
-    required: [true, 'last name is required, please add your last name'],
-  },
-})
+import { TUser } from './user.interface'
 
 const UserSchema = new mongoose.Schema<TUser>({
   name: {
-    type: UserName,
-    required: [true, 'name is required, please add an username'],
+    type: String,
+    required: true
   },
   email: {
     type: String,
-    required: [true, 'user email is required, please add an email address'],
+    required: true
   },
   password: {
     type: String,
-    required: [true, 'please add an user password'],
+    required: true
   },
   phone: {
-    type: Number,
-    required: [true, 'user contact number is required'],
+    type: String,
+    required: true
   },
   role: {
-    type: String,
-    required: [true, 'please add an user role'],
+    enum: ["admin", "user"]
   },
   address: {
     type: String,
-    required: [true, 'user address is required'],
+    required: true
   },
 })
 
