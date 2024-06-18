@@ -6,16 +6,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const user_routes_1 = require("./app/modules/user/user.routes");
+const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
+const notFound_1 = __importDefault(require("./app/middlewares/notFound"));
+const auth_routes_1 = require("./app/modules/auth/auth.routes");
 const app = (0, express_1.default)();
 // parsers
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 // application routes
-app.use('/api/v1', user_routes_1.UserRoutes);
+app.use('/api', user_routes_1.UserRoutes);
+app.use('/api', auth_routes_1.LoginRoute);
 // test route
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.send('Server running');
 });
 // global error handler
-// make an global error handler and call here
+app.use(globalErrorHandler_1.default);
+// not found route
+app.use(notFound_1.default);
 exports.default = app;

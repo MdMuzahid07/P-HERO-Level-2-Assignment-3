@@ -10,6 +10,7 @@ const UserValidationSchema = z.object({
     phone: z.string(),
     role: z.enum(["admin", "user"]),
     address: z.string(),
+    isDeleted: z.boolean().optional()
 });
 
 

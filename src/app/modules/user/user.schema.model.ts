@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import { TUser } from './user.interface'
+import mongoose from 'mongoose';
+import { TUser } from './user.interface';
 
 const UserSchema = new mongoose.Schema<TUser>({
   name: {
@@ -26,7 +26,13 @@ const UserSchema = new mongoose.Schema<TUser>({
     type: String,
     required: true
   },
-})
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
+}, {
+  timestamps: true
+});
 
 
 
