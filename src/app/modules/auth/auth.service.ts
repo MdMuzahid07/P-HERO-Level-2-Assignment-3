@@ -34,11 +34,13 @@ const LoginUser = async (payload: TLogin) => {
         password: isUserExistsOnDB?.password
     };
 
-    const accessToken = jwt.sign(jwtPayload, config.jwt_secret_key as string, { expiresIn: '1d' });
+    const accessToken = jwt.sign(jwtPayload, config.jwt_access_token_secret_key as string, { expiresIn: config.jwt_access_token_expires_in });
+    const refreshToken = jwt.sign(jwtPayload, config.jwt_refresh_token_secret_key as string, { expiresIn: config.jwt_refresh_token_expires_in });
 
 
     return {
-        token: accessToken,
+        accessToken,
+        refreshToken,
         user: isUserExistsOnDB
     };
 };
