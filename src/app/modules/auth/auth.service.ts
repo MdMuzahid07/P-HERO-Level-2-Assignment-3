@@ -3,7 +3,7 @@ import CustomAppError from "../../errors/CustomAppError";
 import UserModel from "../user/user.schema.model";
 import { TLogin } from "./auth.interface";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../../config";
 
 const LoginUser = async (payload: TLogin) => {
@@ -31,7 +31,8 @@ const LoginUser = async (payload: TLogin) => {
 
     const jwtPayload = {
         email: isUserExistsOnDB?.email,
-        password: isUserExistsOnDB?.password
+        password: isUserExistsOnDB?.password,
+        role: isUserExistsOnDB?.role
     };
 
     const accessToken = jwt.sign(jwtPayload, config.jwt_access_token_secret_key as string, { expiresIn: config.jwt_access_token_expires_in });
@@ -46,6 +47,40 @@ const LoginUser = async (payload: TLogin) => {
 };
 
 
-export const LoginServices = {
-    LoginUser
+const refreshToken = async (token: string) => {
+
+    const decoded = jwt.verify(token, config.jwt_refresh_token_secret_key as string) as JwtPayload;
+
+    const { email } = decoded;
+
+    const isUserExistsOnDB = await UserModel.findOne({
+        email
+    });
+
+    if (!isUserExistsOnDB) {
+        throw new CustomAppError(httpStatus.BAD_REQUEST, "User not exists");
+    };
+
+    if (isUserExistsOnDB && isUserExistsOnDB?.isDeleted === true) {
+        throw new CustomAppError(httpStatus.BAD_REQUEST, "User not exists");
+    };
+
+
+    const jwtPayload = {
+        email: isUserExistsOnDB?.email,
+        password: isUserExistsOnDB?.password,
+        role: isUserExistsOnDB?.role
+    };
+
+    const accessToken = jwt.sign(jwtPayload, config.jwt_access_token_secret_key as string, { expiresIn: config.jwt_access_token_expires_in });
+
+    return {
+        accessToken
+    };
+};
+
+
+export const AuthServices = {
+    LoginUser,
+    refreshToken
 };

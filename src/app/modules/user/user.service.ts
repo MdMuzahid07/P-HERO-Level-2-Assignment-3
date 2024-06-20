@@ -24,7 +24,7 @@ const createUserIntoDB = async (payload: TUser) => {
   };
 
   const result = await UserModel.create(user)
-  return result
+  return result;
 };
 
 export const UserService = {

@@ -1,15 +1,23 @@
 import express from "express";
-import { LoginController } from "./auth.controller";
+import { AuthController } from "./auth.controller";
 import requestValidator from "../../middlewares/requestValidator";
-import { LoginValidation } from "./auth.validation";
+import { AuthValidation } from "./auth.validation";
 
 const router = express.Router();
 
 
 router.post(
     "/auth/login",
-    requestValidator(LoginValidation.LoginDataValidation),
-    LoginController.LoginUser
+    requestValidator(AuthValidation.LoginDataValidation),
+    AuthController.LoginUser
 );
+
+
+router.post(
+    "/refresh-token",
+    requestValidator(AuthValidation.refreshTokenValidationSchema),
+    AuthController.refreshToken
+);
+
 
 export const LoginRoute = router;
