@@ -24,7 +24,11 @@ const createFacility = async (req: Request, res: Response, next: NextFunction) =
 
 const updateFacility = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await FacilityServices.updateFacilityFromDB(req?.id, req?.body);
+
+        const { id } = req.params;
+        const updateData = req.body;
+
+        const result = await FacilityServices.updateFacilityFromDB(id, updateData);
 
 
         sendResponse(res, {
@@ -43,7 +47,7 @@ const deleteFacility = async (req: Request, res: Response, next: NextFunction) =
     try {
 
         const { id } = req.params;
-
+        console.log(id);
         const result = await FacilityServices.deleteFacilityFromDB(id);
 
         // this delete will be an soft delete

@@ -9,6 +9,15 @@ const FacilityValidationSchema = z.object({
 });
 
 
+const UpdateFacilityValidationSchema = z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    pricePerHour: z.number().optional(),
+    location: z.string().optional()
+});
+
+
 export const FacilityValidation = {
-    FacilityValidationSchema
+    FacilityValidationSchema,
+    UpdateFacilityValidationSchema
 };
