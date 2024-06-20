@@ -8,6 +8,12 @@ const LoginDataValidation = z.object({
 });
 
 
-export const LoginValidation = {
-    LoginDataValidation
+const refreshTokenValidationSchema = z.object({
+    refreshToken: z.string({ required_error: "refresh is required" })
+});
+
+
+export const AuthValidation = {
+    LoginDataValidation,
+    refreshTokenValidationSchema
 };

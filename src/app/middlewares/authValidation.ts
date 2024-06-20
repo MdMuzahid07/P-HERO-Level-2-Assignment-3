@@ -5,7 +5,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { TUserRole } from "../modules/auth/auth.interface";
 
-const AuthValidation = (...requiredRoles: TUserRole[]) => {
+const authValidation = (...requiredRoles: TUserRole[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             const token = req.headers.authorization;
@@ -41,4 +41,4 @@ const AuthValidation = (...requiredRoles: TUserRole[]) => {
     };
 };
 
-export default AuthValidation;
+export default authValidation;

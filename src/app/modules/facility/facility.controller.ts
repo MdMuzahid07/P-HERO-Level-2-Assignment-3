@@ -41,7 +41,10 @@ const updateFacility = async (req: Request, res: Response, next: NextFunction) =
 
 const deleteFacility = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await FacilityServices.deleteFacilityFromDB(req?.id);
+
+        const { id } = req.params;
+
+        const result = await FacilityServices.deleteFacilityFromDB(id);
 
         // this delete will be an soft delete
         sendResponse(res, {

@@ -1,6 +1,5 @@
-import { TUserRole } from "./auth.interface";
 
-export const USER_ROLES: TUserRole = {
+export const USER_ROLES = {
     admin: "admin",
     user: "user"
 } as const;

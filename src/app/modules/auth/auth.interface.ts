@@ -1,3 +1,4 @@
+import { USER_ROLES } from "./auth.constants";
 
 
 export type TLogin = {
@@ -6,7 +7,4 @@ export type TLogin = {
     role: string
 };
 
-export type TUserRole = {
-    admin: string,
-    user: string
-};
+export type TUserRole = keyof typeof USER_ROLES;
