@@ -34,7 +34,7 @@ const updateFacility = async (req: Request, res: Response, next: NextFunction) =
         sendResponse(res, {
             success: true,
             statusCode: httpStatus.OK,
-            message: "Updated outdoor tennis court with synthetic surface.",
+            message: "Facility updated successfully",
             data: result
         });
 
@@ -47,7 +47,6 @@ const deleteFacility = async (req: Request, res: Response, next: NextFunction) =
     try {
 
         const { id } = req.params;
-        console.log(id);
         const result = await FacilityServices.deleteFacilityFromDB(id);
 
         // this delete will be an soft delete

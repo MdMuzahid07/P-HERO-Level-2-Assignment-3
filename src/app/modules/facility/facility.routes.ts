@@ -31,10 +31,8 @@ router.delete(
 
 router.get(
     "/facility",
-    authValidation(USER_ROLES.admin),
     FacilityController.getAllFacilities
 );
-
 
 
 export const FacilityRoutes = router;
