@@ -4,6 +4,7 @@ import { FacilityValidation } from "./facility.validation";
 import requestValidator from "../../middlewares/requestValidator";
 import authValidation from "../../middlewares/authValidation";
 import { USER_ROLES } from "../auth/auth.constants";
+// import { USER_ROLES } from "../auth/auth.constants";
 
 
 const router = express.Router();
