@@ -9,14 +9,14 @@ const createFacilityIntoDB = async (payload: TFacility) => {
 };
 
 
-const updateFacilityFromDB = async (payload: TFacility) => {
-    const result = "";
+const updateFacilityFromDB = async (id: string, payload: TFacility) => {
+    const result = await FacilityModel.findByIdAndUpdate(id, payload);
     return result;
 };
 
 
-const deleteFacilityFromDB = async (payload: TFacility) => {
-    const result = "";
+const deleteFacilityFromDB = async (id: string) => {
+    const result = await FacilityModel.findByIdAndUpdate(id, { isDeleted: true });
     return result;
 };
 

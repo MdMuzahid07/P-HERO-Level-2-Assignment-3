@@ -17,4 +17,25 @@ router.post(
     FacilityController.createFacility
 );
 
+router.put(
+    "/facility/:id",
+    authValidation(USER_ROLES.admin),
+    requestValidator(FacilityValidation.UpdateFacilityValidationSchema),
+    FacilityController.updateFacility
+);
+
+router.delete(
+    "/facility/:id",
+    authValidation(USER_ROLES.admin),
+    FacilityController.deleteFacility
+);
+
+router.get(
+    "/facility",
+    authValidation(USER_ROLES.admin),
+    FacilityController.getAllFacilities
+);
+
+
+
 export const FacilityRoutes = router;
