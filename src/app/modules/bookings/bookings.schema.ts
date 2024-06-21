@@ -1,9 +1,16 @@
 import mongoose from "mongoose";
+import { TBookings } from "./bookings.interface";
 
 
-
-
-const AvailableTimeSchema = new mongoose.Schema({
+const BookingSchema = new mongoose.Schema<TBookings>({
+    facility: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "facility"
+    },
+    date: {
+        type: String,
+        required: true
+    },
     startTime: {
         type: String,
         required: true
@@ -14,6 +21,6 @@ const AvailableTimeSchema = new mongoose.Schema({
     }
 });
 
+const BookingModel = mongoose.model("bookings", BookingSchema);
 
-export const AvailableTimeModel = mongoose.model("AvailableTime", AvailableTimeSchema);
-
+export default BookingModel;

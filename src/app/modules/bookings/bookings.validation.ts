@@ -1,7 +1,8 @@
 import { z } from "zod";
 
-
-const availabilityValidationSchema = z.object({
+const bookingsValidationSchema = z.object({
+    facility: z.string(),
+    date: z.string(),
     startTime: z.string(),
     endTime: z.string()
 });
@@ -12,9 +13,6 @@ const availabilityValidationSchema = z.object({
 
 
 
-
-
-
-export const bookingValidation = {
-    availabilityValidationSchema
+export const BookingsValidation = {
+    bookingsValidationSchema
 };

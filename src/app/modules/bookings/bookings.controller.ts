@@ -1,30 +1,83 @@
 import { NextFunction, Request, Response } from "express";
-import { BookingServices } from "./bookings.service";
+import { BookingService } from "./bookings.service";
 import sendResponse from "../../utils/send.response";
 import httpStatus from "http-status";
 
 
-const createAvailabilityTime = async (req: Request, res: Response, next: NextFunction) => {
+const createBooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const result = await BookingService.createBookingIntoDB(req.body);
 
-        const result = await BookingServices.createAvailabilityTimeIntoDB(req.body);
 
         sendResponse(res, {
             success: true,
             statusCode: httpStatus.OK,
-            message: "Booking Available time slots added successfully",
+            message: "Booking created successfully",
             data: result
         });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getAllBooking = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await BookingService.createBookingIntoDB(req.body);
+
+
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: "Bookings retrieved successfully",
+            data: result
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getAllBookingByUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await BookingService.createBookingIntoDB(req.body);
+
+
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: "Bookings retrieved successfully",
+            data: result
+        });
+
     } catch (error) {
         next(error);
     }
 };
 
 
-const getAllAvailabilityTime = async (req: Request, res: Response, next: NextFunction) => {
+const cancelABooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const result = await BookingService.createBookingIntoDB(req.body);
 
-        const result = await BookingServices.getAllAvailableTimes();
+
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: "Booking cancelled successfully",
+            data: result
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+const checkAvailability = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await BookingService.createBookingIntoDB(req.body);
+
 
         sendResponse(res, {
             success: true,
@@ -32,13 +85,17 @@ const getAllAvailabilityTime = async (req: Request, res: Response, next: NextFun
             message: "Availability checked successfully",
             data: result
         });
+
     } catch (error) {
         next(error);
     }
 };
 
 
-export const BookingControllers = {
-    createAvailabilityTime,
-    getAllAvailabilityTime
+export const BookingController = {
+    createBooking,
+    getAllBooking,
+    getAllBookingByUser,
+    cancelABooking,
+    checkAvailability
 };

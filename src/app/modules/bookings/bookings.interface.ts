@@ -1,7 +1,12 @@
+import { Types } from "mongoose";
 
-
-
-export type TAvailability = {
+export type TBookings = {
+    facility: Types.ObjectId,
+    date: string,
     startTime: string,
-    endTime: string,
+    endTime: string
 };
+
+
+
+

@@ -1,27 +1,48 @@
 import express from "express";
-import requestValidator from "../../middlewares/requestValidator";
-import { bookingValidation } from "./bookings.validation";
-import { BookingControllers } from "./bookings.controller";
+import { BookingController } from "./bookings.controller";
 import authValidation from "../../middlewares/authValidation";
 import { USER_ROLES } from "../auth/auth.constants";
+import requestValidator from "../../middlewares/requestValidator";
+import { UserValidation } from "../user/user.validation";
+
 
 
 const router = express.Router();
 
-
 router.post(
-    "/check-availability",
-    requestValidator(bookingValidation.availabilityValidationSchema),
+    "/bookings",
+    authValidation(USER_ROLES.user),
+    requestValidator(UserValidation.UserValidationSchema),
+    BookingController.createBooking
+);
+
+router.get(
+    "/bookings",
     authValidation(USER_ROLES.admin),
-    BookingControllers.createAvailabilityTime
+    requestValidator(UserValidation.UserValidationSchema),
+    BookingController.getAllBooking
+);
+
+router.get(
+    "/bookings/user",
+    authValidation(USER_ROLES.user),
+    requestValidator(UserValidation.UserValidationSchema),
+    BookingController.getAllBookingByUser
+);
+
+router.delete(
+    "/bookings/:id",
+    authValidation(USER_ROLES.user),
+    requestValidator(UserValidation.UserValidationSchema),
+    BookingController.cancelABooking
 );
 
 router.get(
     "/check-availability",
-    authValidation(USER_ROLES.admin),
-    BookingControllers.getAllAvailabilityTime
+    authValidation(USER_ROLES.admin, USER_ROLES.user),
+    requestValidator(UserValidation.UserValidationSchema),
+    BookingController.checkAvailability
 );
 
 
-
-export const BookingRouter = router;
+export const BookingsRouter = router;

@@ -1,20 +1,37 @@
-import { TAvailability } from "./bookings.interface";
-import { AvailableTimeModel } from "./bookings.schema";
+import { TBookings } from "./bookings.interface";
+import BookingModel from "./bookings.schema";
 
-const createAvailabilityTimeIntoDB = async (payload: TAvailability) => {
-    const result = await AvailableTimeModel.create(payload);
+
+const createBookingIntoDB = async (payload: TBookings) => {
+    const result = await BookingModel.create(payload);
+    return result;
+};
+
+const getAllBookingsFromDB = async () => {
+    const result = await BookingModel.find();
+    return result;
+};
+
+const getAllBookingsByUserFromDB = async () => {
+    const result = await BookingModel.find();
+    return result;
+};
+
+const cancelABookingFromDB = async () => {
+    const result = await BookingModel.find();
+    return result;
+};
+
+const checkAvailabilityFromDB = async () => {
+    const result = " ";
     return result;
 };
 
 
-const getAllAvailableTimes = async () => {
-    const result = await AvailableTimeModel.find();
-    return result;
-};
-
-
-
-export const BookingServices = {
-    createAvailabilityTimeIntoDB,
-    getAllAvailableTimes
+export const BookingService = {
+    createBookingIntoDB,
+    getAllBookingsFromDB,
+    getAllBookingsByUserFromDB,
+    cancelABookingFromDB,
+    checkAvailabilityFromDB
 };
