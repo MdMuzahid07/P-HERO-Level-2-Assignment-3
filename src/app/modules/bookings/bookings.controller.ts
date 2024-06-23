@@ -48,7 +48,12 @@ const getAllBooking = async (req: Request, res: Response, next: NextFunction) =>
 const getAllBookingByUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
-        const result = await BookingService.getAllBookingsByUserFromDB();
+        const token = req.headers.authorization;
+
+        const decoded = jwt.verify(token as string, config.jwt_access_token_secret_key as string);
+        const userId = (decoded as JwtPayload)?.id;
+
+        const result = await BookingService.getAllBookingsByUserFromDB(userId);
 
 
         sendResponse(res, {

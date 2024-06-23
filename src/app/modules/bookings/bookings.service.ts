@@ -21,8 +21,6 @@ const createBookingIntoDB = async (payload: TBookings, user: string) => {
         isBooked: "confirmed"
     };
 
-    console.log(BookingData);
-
 
     const result = await BookingModel.create(BookingData);
 
@@ -34,8 +32,9 @@ const getAllBookingsFromDB = async () => {
     return result;
 };
 
-const getAllBookingsByUserFromDB = async () => {
-    const result = await BookingModel.find();
+const getAllBookingsByUserFromDB = async (id: string) => {
+
+    const result = await BookingModel.find({ user: id });
     return result;
 };
 
