@@ -38,8 +38,8 @@ const getAllBookingsByUserFromDB = async (id: string) => {
     return result;
 };
 
-const cancelABookingFromDB = async () => {
-    const result = await BookingModel.find();
+const cancelABookingFromDB = async (id: string) => {
+    const result = await BookingModel.findByIdAndUpdate(id, { isBooked: "canceled" });
     return result;
 };
 

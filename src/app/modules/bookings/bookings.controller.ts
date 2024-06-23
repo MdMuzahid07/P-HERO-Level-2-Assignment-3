@@ -71,7 +71,8 @@ const getAllBookingByUser = async (req: Request, res: Response, next: NextFuncti
 
 const cancelABooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.cancelABookingFromDB();
+        const { id } = req.params;
+        const result = await BookingService.cancelABookingFromDB(id);
 
 
         sendResponse(res, {
