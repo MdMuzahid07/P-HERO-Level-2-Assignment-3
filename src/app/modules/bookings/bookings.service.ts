@@ -17,18 +17,15 @@ const createBookingIntoDB = async (payload: TBookings, user: string) => {
     const startTime = payload?.startTime;
     const endTime = payload?.endTime;
 
-    const hours = startEndTimeToHoursCalculate(startTime, endTime);
+    const totalHours = startEndTimeToHoursCalculate(startTime, endTime);
 
-    console.log(hours);
-
+    const payableAmount = Number(isFacilityExists?.pricePerHour) * totalHours;
 
     const BookingData = {
         ...payload,
         user,
-        payableAmount: 90,
-        isBooked: "confirmed"
+        payableAmount
     };
-
 
     const result = await BookingModel.create(BookingData);
 
