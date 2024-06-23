@@ -30,6 +30,7 @@ const LoginUser = async (payload: TLogin) => {
     // jwt token 
 
     const jwtPayload = {
+        id: isUserExistsOnDB._id,
         email: isUserExistsOnDB?.email,
         password: isUserExistsOnDB?.password,
         role: isUserExistsOnDB?.role

@@ -18,6 +18,16 @@ const BookingSchema = new mongoose.Schema<TBookings>({
     endTime: {
         type: String,
         required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    payableAmount: {
+        type: Number,
+    },
+    isBooked: {
+        type: String,
     }
 });
 

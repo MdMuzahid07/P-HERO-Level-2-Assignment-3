@@ -23,7 +23,7 @@ const createUserIntoDB = async (payload: TUser) => {
     password: hash
   };
 
-  const result = await UserModel.create(user)
+  const result = await UserModel.create(user);
   return result;
 };
 

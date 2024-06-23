@@ -1,14 +1,36 @@
+import httpStatus from "http-status";
+import CustomAppError from "../../errors/CustomAppError";
+import FacilityModel from "../facility/facility.schema.model";
 import { TBookings } from "./bookings.interface";
-import BookingModel from "./bookings.schema";
+import BookingModel from "./bookings.schema.model";
 
 
-const createBookingIntoDB = async (payload: TBookings) => {
-    const result = await BookingModel.create(payload);
+const createBookingIntoDB = async (payload: TBookings, user: string) => {
+
+    const isFacilityExists = await FacilityModel.findById(payload?.facility);
+
+
+    if (!isFacilityExists) {
+        throw new CustomAppError(httpStatus.BAD_REQUEST, "Facility not exists");
+    };
+
+    const BookingData = {
+        ...payload,
+        user,
+        payableAmount: 90,
+        isBooked: "confirmed"
+    };
+
+    console.log(BookingData);
+
+
+    const result = await BookingModel.create(BookingData);
+
     return result;
 };
 
 const getAllBookingsFromDB = async () => {
-    const result = await BookingModel.find();
+    const result = await BookingModel.find().populate("facility").populate("user");
     return result;
 };
 

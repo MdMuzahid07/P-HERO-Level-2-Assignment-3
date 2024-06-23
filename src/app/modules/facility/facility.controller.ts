@@ -81,9 +81,29 @@ const getAllFacilities = async (req: Request, res: Response, next: NextFunction)
 };
 
 
+const getAFacilityUsingID = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const result = await FacilityServices.getASingleFacilityFromDB(id);
+
+        // this delete will be an soft delete
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: "Facility retrieved successfully",
+            data: result
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 export const FacilityController = {
     createFacility,
     updateFacility,
     deleteFacility,
-    getAllFacilities
+    getAllFacilities,
+    getAFacilityUsingID
 };

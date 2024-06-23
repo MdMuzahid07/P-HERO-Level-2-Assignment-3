@@ -4,7 +4,10 @@ export type TBookings = {
     facility: Types.ObjectId,
     date: string,
     startTime: string,
-    endTime: string
+    endTime: string,
+    user: Types.ObjectId,
+    payableAmount: number,
+    isBooked: string
 };
 
 

@@ -26,9 +26,16 @@ const getAllFacilitiesFromDB = async () => {
     return result;
 };
 
+const getASingleFacilityFromDB = async (id: string) => {
+    const result = await FacilityModel.findById(id);
+    return result;
+};
+
+
 export const FacilityServices = {
     createFacilityIntoDB,
     updateFacilityFromDB,
     deleteFacilityFromDB,
-    getAllFacilitiesFromDB
+    getAllFacilitiesFromDB,
+    getASingleFacilityFromDB
 };

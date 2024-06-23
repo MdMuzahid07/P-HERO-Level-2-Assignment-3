@@ -56,6 +56,6 @@ UserSchema.methods.toJSON = function () {
 
 
 // create user model
-const UserModel = mongoose.model<TUser>('User', UserSchema)
+const UserModel = mongoose.model<TUser>('User', UserSchema);
 
 export default UserModel;

@@ -21,7 +21,7 @@ app.use((0, cookie_parser_1.default)());
 app.use('/api', user_routes_1.UserRoutes);
 app.use('/api', auth_routes_1.LoginRoute);
 app.use('/api', facility_routes_1.FacilityRoutes);
-app.use('/api', bookings_routes_1.BookingRouter);
+app.use('/api', bookings_routes_1.BookingsRouter);
 // test route
 app.get('/', (req, res) => {
     res.send('Server running');

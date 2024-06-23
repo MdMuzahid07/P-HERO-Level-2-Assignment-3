@@ -2,11 +2,18 @@ import { NextFunction, Request, Response } from "express";
 import { BookingService } from "./bookings.service";
 import sendResponse from "../../utils/send.response";
 import httpStatus from "http-status";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import config from "../../config";
 
 
 const createBooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.createBookingIntoDB(req.body);
+        const token = req.headers.authorization;
+
+        const decoded = jwt.verify(token as string, config.jwt_access_token_secret_key as string);
+        const userId = (decoded as JwtPayload)?.id;
+
+        const result = await BookingService.createBookingIntoDB(req.body, userId);
 
 
         sendResponse(res, {
@@ -23,7 +30,7 @@ const createBooking = async (req: Request, res: Response, next: NextFunction) =>
 
 const getAllBooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.createBookingIntoDB(req.body);
+        const result = await BookingService.getAllBookingsFromDB();
 
 
         sendResponse(res, {
@@ -40,7 +47,8 @@ const getAllBooking = async (req: Request, res: Response, next: NextFunction) =>
 
 const getAllBookingByUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.createBookingIntoDB(req.body);
+
+        const result = await BookingService.getAllBookingsByUserFromDB();
 
 
         sendResponse(res, {
@@ -58,7 +66,7 @@ const getAllBookingByUser = async (req: Request, res: Response, next: NextFuncti
 
 const cancelABooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.createBookingIntoDB(req.body);
+        const result = await BookingService.cancelABookingFromDB();
 
 
         sendResponse(res, {
@@ -76,7 +84,7 @@ const cancelABooking = async (req: Request, res: Response, next: NextFunction) =
 
 const checkAvailability = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.createBookingIntoDB(req.body);
+        const result = await BookingService.checkAvailabilityFromDB();
 
 
         sendResponse(res, {

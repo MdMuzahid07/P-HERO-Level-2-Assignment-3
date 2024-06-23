@@ -35,5 +35,10 @@ router.get(
     FacilityController.getAllFacilities
 );
 
+router.get(
+    "/facility/:id",
+    FacilityController.getAFacilityUsingID
+);
+
 
 export const FacilityRoutes = router;
