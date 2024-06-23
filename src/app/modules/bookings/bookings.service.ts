@@ -3,16 +3,24 @@ import CustomAppError from "../../errors/CustomAppError";
 import FacilityModel from "../facility/facility.schema.model";
 import { TBookings } from "./bookings.interface";
 import BookingModel from "./bookings.schema.model";
+import startEndTimeToHoursCalculate from "../../utils/startEndTimeToHoursCalculate";
 
 
 const createBookingIntoDB = async (payload: TBookings, user: string) => {
 
     const isFacilityExists = await FacilityModel.findById(payload?.facility);
 
-
     if (!isFacilityExists) {
         throw new CustomAppError(httpStatus.BAD_REQUEST, "Facility not exists");
     };
+
+    const startTime = payload?.startTime;
+    const endTime = payload?.endTime;
+
+    const hours = startEndTimeToHoursCalculate(startTime, endTime);
+
+    console.log(hours);
+
 
     const BookingData = {
         ...payload,
