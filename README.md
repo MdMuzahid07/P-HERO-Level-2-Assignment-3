@@ -58,17 +58,14 @@ yarn build
 yarn start
 ```
 
-## Project Structure
+### scripts
+```bash 
+yarn lint
+yarn lint-fix
+yarn prettier
+yarn prettier-fix
 ```
-src/
-|-- controllers/
-|-- middlewares/
-|-- models/
-|-- routes/
-|-- services/
-|-- utils/
-|-- server.ts
-```
+
 
 ## API Endpoints
 
