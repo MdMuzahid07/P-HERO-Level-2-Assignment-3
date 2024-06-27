@@ -24,7 +24,7 @@ Welcome to the Sports Facility Booking Platform! This project is designed to pro
 
 ## Getting Started
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - Yarn
 
 ### Installation
