@@ -30,21 +30,28 @@ Welcome to the Sports Facility Booking Platform! This project is designed to pro
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/sports-facility-booking-platform.git
+   git clone https://github.com/MdMuzahid07/P-HERO-Level-2-Assignment-3.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd sports-facility-booking-platform
+   cd ./P-HERO-Level-2-Assignment-3
    ```
 3. Install dependencies:
    ```bash
    yarn install
    ```
 4. Create a `.env` file in the root directory and add the following environment variables:
-   ```env
-   PORT=3000
-   MONGO_URI=mongodb://localhost:27017/sports-facility-booking
-   JWT_SECRET=your_jwt_secret
+   ```.env
+  DB_USERNAME=
+DB_PASSWORD=
+DB_URL=
+PORT=5000
+NODE_ENV=development
+BCRYPT_SALT_ROUND=10
+JWT_ACCESS_SECRET_KEY=
+JWT_REFRESH_SECRET_KEY=
+JWT_ACCESS_TOKEN_EXPIRES_IN=3d
+JWT_REFRESH_TOKEN_EXPIRES_IN=10d
    ```
 5. Start the development server:
    ```bash
