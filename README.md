@@ -41,8 +41,8 @@ Welcome to the Sports Facility Booking Platform! This project is designed to pro
    yarn install
    ```
 4. Create a `.env` file in the root directory and add the following environment variables:
-   ```.env
-  DB_USERNAME=
+  ```env
+DB_USERNAME=
 DB_PASSWORD=
 DB_URL=
 PORT=5000
@@ -52,7 +52,8 @@ JWT_ACCESS_SECRET_KEY=
 JWT_REFRESH_SECRET_KEY=
 JWT_ACCESS_TOKEN_EXPIRES_IN=3d
 JWT_REFRESH_TOKEN_EXPIRES_IN=10d
-   ```
+```
+ 
 5. Start the development server:
    ```bash
    yarn start-dev
