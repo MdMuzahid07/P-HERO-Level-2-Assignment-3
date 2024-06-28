@@ -90,7 +90,10 @@ const cancelABooking = async (req: Request, res: Response, next: NextFunction) =
 
 const checkAvailability = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await BookingService.checkAvailabilityFromDB();
+
+        const date = req.query.date || new Date().toISOString().split("T")[0];
+
+        const result = await BookingService.checkAvailabilityFromDB(date);
 
 
         sendResponse(res, {

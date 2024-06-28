@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from "http-status";
 import CustomAppError from "../../errors/CustomAppError";
 import FacilityModel from "../facility/facility.schema.model";
@@ -48,9 +49,36 @@ const cancelABookingFromDB = async (id: string) => {
     return result;
 };
 
-const checkAvailabilityFromDB = async () => {
-    const result = " ";
-    return result;
+const checkAvailabilityFromDB = async (date: any) => {
+
+    // creating 24 hours time slots
+    const allSlots = [];
+    for (let hours = 0; hours < 24; hours++) {
+        const startH = hours.toString().padStart(2, "0");
+        const endH = (hours + 1).toString().padStart(2, "0");
+        allSlots.push({
+            startTime: `${startH}:00`,
+            endTime: `${endH}:00`,
+        });
+    }
+
+
+    // retrieving already booked slots from database with an specific date
+    const bookings = await BookingModel.find({ date });
+
+
+    // filtering all available slots
+    let availableSlots = [...allSlots];
+    bookings.forEach(booking => {
+
+        availableSlots = availableSlots.filter(slot => {
+            return !(booking.startTime < slot.endTime && booking.endTime > slot.startTime);
+        });
+
+    });
+
+
+    return availableSlots;
 };
 
 
