@@ -8,7 +8,8 @@ import { TUserRole } from "../modules/auth/auth.interface";
 const authValidation = (...requiredRoles: TUserRole[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const token = req.headers.authorization;
+            const splitTokenWithBearer = req.headers.authorization;
+            const token = splitTokenWithBearer?.split(" ", 2)?.[1];
 
             if (!token) {
                 throw new CustomAppError(httpStatus.UNAUTHORIZED, "you are not authorized");

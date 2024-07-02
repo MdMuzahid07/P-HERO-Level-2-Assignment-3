@@ -1,9 +1,18 @@
+import httpStatus from "http-status";
+import CustomAppError from "../../errors/CustomAppError";
 import { TFacility } from "./facility.interface";
 import FacilityModel from "./facility.schema.model";
 
 
 
 const createFacilityIntoDB = async (payload: TFacility) => {
+
+    const isFacilityExists = await FacilityModel.findOne({ name: payload?.name, description: payload?.description });
+
+    if (isFacilityExists) {
+        throw new CustomAppError(httpStatus.CONFLICT, `${payload?.name} facility already exists`);
+    }
+
     const result = await FacilityModel.create(payload);
     return result;
 };
