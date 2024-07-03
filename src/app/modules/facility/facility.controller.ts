@@ -77,7 +77,7 @@ const getAllFacilities = async (
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
-      message: "Facilities retrieved successfully",
+      message: `${result.length > 0 ? "Facilities retrieved successfully" : "not data found"}`,
       data: result,
     });
   } catch (error) {

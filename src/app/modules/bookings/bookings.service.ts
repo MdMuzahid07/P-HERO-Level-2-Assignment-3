@@ -107,13 +107,39 @@ const getAllBookingsByUserFromDB = async (id: string) => {
 };
 
 const cancelABookingFromDB = async (id: string) => {
-  const result = await BookingModel.findByIdAndUpdate(
+
+  const isAlreadyCancelled = await BookingModel.findById(id);
+
+  if (isAlreadyCancelled?.isBooked === "canceled") {
+    throw new CustomAppError(httpStatus.CONFLICT, "this booking is already cancelled");
+  };
+
+
+  const response = await BookingModel.findByIdAndUpdate(
     id,
     { isBooked: "canceled" },
     { new: true },
-  );
+  ).populate({
+    path: "facility",
+    select: "-__v -createdAt -updatedAt"
+  });
+
+  /***
+  * converting array of objects to object and making it also solid js object using toObject() method  because we are getting mongodb data
+  * ***/
+
+  const result = response?.toObject() as Partial<TBookings>;
+
+  // removing some property from object by looping them
+  if (result) {
+    delete result.__v;
+    delete result.createdAt;
+    delete result.updatedAt;
+  };
+
   return result;
 };
+
 
 const checkAvailabilityFromDB = async (date: any) => {
   // creating 24 hours time slots
