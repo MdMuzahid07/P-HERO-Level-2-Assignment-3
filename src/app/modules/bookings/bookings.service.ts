@@ -82,7 +82,27 @@ const getAllBookingsFromDB = async () => {
 };
 
 const getAllBookingsByUserFromDB = async (id: string) => {
-  const result = await BookingModel.find({ user: id });
+  const response = await BookingModel.find({ user: id })
+    .populate({
+      path: "facility",
+      select: "-__v -createdAt -updatedAt"
+    });
+
+  /***
+  * converting array of objects to object and making it also solid js object using toObject() method  because we are getting mongodb data
+  * ***/
+
+  const result = response?.map(booking => booking?.toObject() as Partial<TBookings>);
+
+  // removing some property from object by looping them
+  if (result) {
+    result.forEach((result) => {
+      delete result.__v;
+      delete result.createdAt;
+      delete result.updatedAt;
+    });
+  };
+
   return result;
 };
 

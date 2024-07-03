@@ -69,7 +69,8 @@ const getAllBookingByUser = async (
   next: NextFunction,
 ) => {
   try {
-    const token = req.headers.authorization;
+    const tokenWithBearer = req.headers.authorization;
+    const token = tokenWithBearer?.split(" ", 2)[1];
 
     const decoded = jwt.verify(
       token as string,
