@@ -77,7 +77,7 @@ const deleteFacilityFromDB = async (id: string) => {
 };
 
 const getAllFacilitiesFromDB = async () => {
-  const response = await FacilityModel.find();
+  const response = await FacilityModel.find({ isDeleted: false });
 
   /***
    * converting array of objects to object and making it also solid js object using toObject() method  because we are getting mongodb data
