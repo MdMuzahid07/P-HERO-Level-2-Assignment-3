@@ -5,19 +5,16 @@ import { AuthValidation } from "./auth.validation";
 
 const router = express.Router();
 
-
 router.post(
-    "/auth/login",
-    requestValidator(AuthValidation.LoginDataValidation),
-    AuthController.LoginUser
+  "/auth/login",
+  requestValidator(AuthValidation.LoginDataValidation),
+  AuthController.LoginUser,
 );
 
-
 router.post(
-    "/refresh-token",
-    requestValidator(AuthValidation.refreshTokenValidationSchema),
-    AuthController.refreshToken
+  "/refresh-token",
+  requestValidator(AuthValidation.refreshTokenValidationSchema),
+  AuthController.refreshToken,
 );
-
 
 export const LoginRoute = router;

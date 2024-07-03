@@ -1,4 +1,3 @@
-
 export type TUser = {
   name: string;
   email: string;
@@ -7,4 +6,7 @@ export type TUser = {
   role: "admin" | "user";
   address: string;
   isDeleted: boolean;
+  __v?: null;
+  createdAt?: string;
+  updatedAt?: string;
 };

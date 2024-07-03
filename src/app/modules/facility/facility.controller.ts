@@ -3,107 +3,113 @@ import sendResponse from "../../utils/send.response";
 import httpStatus from "http-status";
 import { FacilityServices } from "./facility.service";
 
+const createFacility = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const result = await FacilityServices.createFacilityIntoDB(req.body);
 
-
-const createFacility = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const result = await FacilityServices.createFacilityIntoDB(req.body);
-
-
-        sendResponse(res, {
-            success: true,
-            statusCode: httpStatus.OK,
-            message: "Facility added successfully",
-            data: result
-        });
-
-    } catch (error) {
-        next(error);
-    }
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Facility added successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const updateFacility = async (req: Request, res: Response, next: NextFunction) => {
-    try {
+const updateFacility = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
 
-        const { id } = req.params;
-        const updateData = req.body;
+    const result = await FacilityServices.updateFacilityFromDB(id, updateData);
 
-        const result = await FacilityServices.updateFacilityFromDB(id, updateData);
-
-
-        sendResponse(res, {
-            success: true,
-            statusCode: httpStatus.OK,
-            message: "Facility updated successfully",
-            data: result
-        });
-
-    } catch (error) {
-        next(error);
-    }
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Facility updated successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const deleteFacility = async (req: Request, res: Response, next: NextFunction) => {
-    try {
+const deleteFacility = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await FacilityServices.deleteFacilityFromDB(id);
 
-        const { id } = req.params;
-        const result = await FacilityServices.deleteFacilityFromDB(id);
-
-        // this delete will be an soft delete
-        sendResponse(res, {
-            success: true,
-            statusCode: httpStatus.OK,
-            message: "Facility deleted successfully",
-            data: result
-        });
-
-    } catch (error) {
-        next(error);
-    }
+    // this delete will be an soft delete
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Facility deleted successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
+const getAllFacilities = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const result = await FacilityServices.getAllFacilitiesFromDB();
 
-const getAllFacilities = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const result = await FacilityServices.getAllFacilitiesFromDB();
-
-        // this delete will be an soft delete
-        sendResponse(res, {
-            success: true,
-            statusCode: httpStatus.OK,
-            message: "Facilities retrieved successfully",
-            data: result
-        });
-
-    } catch (error) {
-        next(error);
-    }
+    // this delete will be an soft delete
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Facilities retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
+const getAFacilityUsingID = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await FacilityServices.getASingleFacilityFromDB(id);
 
-const getAFacilityUsingID = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const { id } = req.params;
-        const result = await FacilityServices.getASingleFacilityFromDB(id);
-
-        // this delete will be an soft delete
-        sendResponse(res, {
-            success: true,
-            statusCode: httpStatus.OK,
-            message: "Facility retrieved successfully",
-            data: result
-        });
-
-    } catch (error) {
-        next(error);
-    }
+    // this delete will be an soft delete
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Facility retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
-
 
 export const FacilityController = {
-    createFacility,
-    updateFacility,
-    deleteFacility,
-    getAllFacilities,
-    getAFacilityUsingID
+  createFacility,
+  updateFacility,
+  deleteFacility,
+  getAllFacilities,
+  getAFacilityUsingID,
 };

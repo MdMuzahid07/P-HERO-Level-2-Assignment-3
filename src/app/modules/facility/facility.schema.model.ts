@@ -1,30 +1,31 @@
 import mongoose from "mongoose";
 
-
 const FacilitySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    pricePerHour: {
-        type: Number,
-        required: true
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    isDeleted: {
-        type: Boolean,
-        default: false
-    }
-});
-
-
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  pricePerHour: {
+    type: Number,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+},
+  {
+    timestamps: true
+  }
+);
 
 // create an model for facility
 

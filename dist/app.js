@@ -18,13 +18,13 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
 // application routes
-app.use('/api', user_routes_1.UserRoutes);
-app.use('/api', auth_routes_1.LoginRoute);
-app.use('/api', facility_routes_1.FacilityRoutes);
-app.use('/api', bookings_routes_1.BookingsRouter);
+app.use("/api", user_routes_1.UserRoutes);
+app.use("/api", auth_routes_1.LoginRoute);
+app.use("/api", facility_routes_1.FacilityRoutes);
+app.use("/api", bookings_routes_1.BookingsRouter);
 // test route
-app.get('/', (req, res) => {
-    res.send('Server running');
+app.get("/", (req, res) => {
+    res.send("Server running");
 });
 // global error handler
 app.use(globalErrorHandler_1.default);
