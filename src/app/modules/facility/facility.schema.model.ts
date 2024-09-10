@@ -17,6 +17,11 @@ const FacilitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    default: " ",
+    required: true
+  },
   isDeleted: {
     type: Boolean,
     default: false,
