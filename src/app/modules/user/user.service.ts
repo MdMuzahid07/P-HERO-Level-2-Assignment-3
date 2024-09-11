@@ -21,7 +21,6 @@ const createUserIntoDB = async (payload: TUser) => {
   // jwt 
   const jwtPayload = {
     email: payload?.email,
-    password: payload?.password,
     role: payload?.role,
   };
 
