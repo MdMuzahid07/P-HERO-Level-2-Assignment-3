@@ -4,6 +4,7 @@ import { TUser } from "./user.interface";
 import UserModel from "./user.schema.model";
 import bcrypt from "bcrypt";
 import config from "../../config";
+import jwt from "jsonwebtoken";
 
 const createUserIntoDB = async (payload: TUser) => {
   const isUserExists = await UserModel.findOne({ email: payload?.email });
@@ -15,6 +16,26 @@ const createUserIntoDB = async (payload: TUser) => {
       "this user is already exits",
     );
   }
+
+
+  // jwt 
+  const jwtPayload = {
+    email: payload?.email,
+    password: payload?.password,
+    role: payload?.role,
+  };
+
+  const accessToken = jwt.sign(
+    jwtPayload,
+    config.jwt_access_token_secret_key as string,
+    { expiresIn: config.jwt_access_token_expires_in },
+  );
+  const refreshToken = jwt.sign(
+    jwtPayload,
+    config.jwt_refresh_token_secret_key as string,
+    { expiresIn: config.jwt_refresh_token_expires_in },
+  );
+
 
   const salt = bcrypt.genSaltSync(Number(config.bcrypt_salt_round));
   const hash = bcrypt.hashSync(payload?.password, salt);
@@ -37,7 +58,11 @@ const createUserIntoDB = async (payload: TUser) => {
     delete result.updatedAt;
   };
 
-  return result;
+  return {
+    accessToken,
+    refreshToken,
+    user: result,
+  };
 };
 
 export const UserService = {
