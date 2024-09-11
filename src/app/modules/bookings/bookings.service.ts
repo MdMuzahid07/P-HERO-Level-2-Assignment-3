@@ -86,7 +86,11 @@ const getAllBookingsByUserFromDB = async (id: string) => {
     .populate({
       path: "facility",
       select: "-__v -createdAt -updatedAt"
-    });
+    })
+    .populate({
+      path: "user"
+    })
+    ;
 
   /***
   * converting array of objects to object and making it also solid js object using toObject() method  because we are getting mongodb data

@@ -34,8 +34,8 @@ router.delete(
 
 router.get(
   "/check-availability",
-  // authValidation(USER_ROLES.admin, USER_ROLES.user),
+  authValidation(USER_ROLES.admin, USER_ROLES.user),
   BookingController.checkAvailability,
 );
 
-export const BookingsRouter = router;
+export const BookingsRoutes = router;

@@ -15,6 +15,14 @@ const createBooking = async (
     const tokenWithBearer = req.headers.authorization;
     const token = tokenWithBearer?.split(" ", 2)[1];
 
+    if (!token) {
+      return sendResponse(res, {
+        success: false,
+        statusCode: httpStatus.UNAUTHORIZED,
+        message: "You are not authorized"
+      });
+    }
+
     const decoded = jwt.verify(
       token as string,
       config.jwt_access_token_secret_key as string,

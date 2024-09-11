@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-// importing path from nodejs, a built in module
 import path from "path";
+// importing path from nodejs, a built in module
 
 // joining the .env file in current directory ,and setting in path using nodejs path module
 dotenv.config({ path: path.join(process.cwd(), ".env") });
