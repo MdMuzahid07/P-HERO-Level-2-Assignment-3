@@ -5,6 +5,10 @@ import httpStatus from "http-status";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../../config";
 import { TBookings } from "./bookings.interface";
+import UserModel from "../user/user.schema.model";
+import FacilityModel from "../facility/facility.schema.model";
+import startEndTimeToHoursCalculate from "../../utils/startEndTimeToHoursCalculate";
+import { initiatePayment } from "../../utils/payment.utils";
 
 const createBooking = async (
   req: Request,
@@ -41,11 +45,33 @@ const createBooking = async (
     };
 
 
+
+
+    // payment 
+    const startTime = req?.body?.startTime;
+    const endTime = req?.body?.endTime;
+    const totalHours = startEndTimeToHoursCalculate(startTime, endTime);
+    const isFacilityExists = await FacilityModel.findById(req?.body?.facility);
+    const userInfo = await UserModel.findById({ _id: userId });
+    const transactionId = `TSXID${Math.random() * 10} ${Date.now()}`;
+    const payableAmount = Number(isFacilityExists?.pricePerHour) * totalHours;
+
+    const paymentData = {
+      transactionId,
+      payableAmount,
+      name: userInfo?.name as string,
+      email: userInfo?.email as string,
+      address: userInfo?.address as string,
+      phone: userInfo?.phone as string
+    };
+
+    const paymentSession = await initiatePayment(paymentData);
+
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
       message: "Booking created successfully",
-      data: result,
+      data: { result, paymentSession },
     });
   } catch (error) {
     next(error);

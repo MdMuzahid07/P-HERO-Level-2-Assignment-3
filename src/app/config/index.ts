@@ -14,4 +14,7 @@ export default {
   jwt_refresh_token_secret_key: process.env.JWT_REFRESH_SECRET_KEY,
   jwt_access_token_expires_in: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN,
   jwt_refresh_token_expires_in: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN,
+  aamarpay_store_id: process.env.STORE_ID,
+  aamarpay_signature_key: process.env.SIGNATURE_KEY,
+  aamarpay_payment_url: process.env.PAYMENT_URL
 };
