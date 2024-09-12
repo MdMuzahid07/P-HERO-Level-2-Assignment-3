@@ -127,7 +127,24 @@ const checkAvailability = async (
   try {
     const date = req.query.date || new Date().toISOString().split("T")[0];
 
-    const result = await BookingService.checkAvailabilityFromDB(date);
+    if (!date) {
+      return sendResponse(res, {
+        success: false,
+        statusCode: httpStatus.BAD_REQUEST,
+        message: "Invalid date format",
+      });
+    }
+
+    const facilityId = req.query.facility as string;
+    if (!facilityId) {
+      return sendResponse(res, {
+        success: false,
+        statusCode: httpStatus.BAD_REQUEST,
+        message: "Facility ID is required",
+      });
+    }
+
+    const result = await BookingService.checkAvailabilityFromDB(date, facilityId);
 
     sendResponse(res, {
       success: true,

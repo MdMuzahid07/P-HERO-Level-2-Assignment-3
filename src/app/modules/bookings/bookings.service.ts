@@ -145,7 +145,7 @@ const cancelABookingFromDB = async (id: string) => {
 };
 
 
-const checkAvailabilityFromDB = async (date: any) => {
+const checkAvailabilityFromDB = async (date: any, facilityId: string) => {
   // creating 24 hours time slots
   const allSlots = [];
   for (let hours = 0; hours < 24; hours++) {
@@ -156,13 +156,12 @@ const checkAvailabilityFromDB = async (date: any) => {
       endTime: `${endH}:00`,
     });
   }
-
-  // retrieving already booked slots from database with an specific date
-  const bookings = await BookingModel.find({ date });
+  // retrieving already booked slots from database with an specific date and facility id
+  const bookings = await BookingModel.find({ date: date, facility: facilityId });
 
   // filtering all available slots
   let availableSlots = [...allSlots];
-  bookings.forEach((booking) => {
+  bookings?.forEach((booking) => {
     availableSlots = availableSlots.filter((slot) => {
       return !(
         booking.startTime < slot.endTime && booking.endTime > slot.startTime
