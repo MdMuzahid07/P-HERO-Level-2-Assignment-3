@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { LoginRoute } from "./app/modules/auth/auth.routes";
 import { FacilityRoutes } from "./app/modules/facility/facility.routes";
 import { BookingsRoutes } from "./app/modules/bookings/bookings.routes";
+import { paymentRoutes } from "./app/modules/payment/payment.routes";
 
 const app: Application = express();
 
@@ -22,6 +23,7 @@ app.use("/api", UserRoutes);
 app.use("/api", LoginRoute);
 app.use("/api", FacilityRoutes);
 app.use("/api", BookingsRoutes);
+app.use("/api/payment", paymentRoutes);
 
 // test route
 app.get("/", (req: Request, res: Response) => {
