@@ -31,9 +31,30 @@ const createFacilityIntoDB = async (payload: TFacility) => {
 };
 
 const updateFacilityFromDB = async (id: string, payload: TFacility) => {
-  const responseAfterUpdate = await FacilityModel.findByIdAndUpdate(id, payload, {
-    new: true,
-  });
+
+  if (!id) {
+    throw new Error("Id is required to update facility");
+  }
+
+  if (!payload) {
+    throw new Error("Data is required to update facility");
+  }
+
+  const isFacilityExists = await FacilityModel.findById({ _id: id });
+
+  if (!isFacilityExists) {
+    throw new Error("This facility not exists to update");
+  }
+
+  const responseAfterUpdate = await FacilityModel.findByIdAndUpdate(
+    id,
+    // we use $set operator to update specific field
+    { $set: payload },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
 
   const result = responseAfterUpdate?.toObject() as Partial<TFacility>;
 

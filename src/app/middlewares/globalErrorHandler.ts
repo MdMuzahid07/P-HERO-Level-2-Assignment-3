@@ -12,7 +12,7 @@ function globalErrorHandler(
   res: Response,
   next: NextFunction,
 ) {
-  let statusCode = error.statusCode || 5000;
+  let statusCode = error.statusCode || 500;
   let message = error.message || "Something went wrong!";
 
   let errorSources: TErrorSources = [

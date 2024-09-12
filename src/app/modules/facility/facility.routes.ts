@@ -15,7 +15,7 @@ router.post(
   FacilityController.createFacility,
 );
 
-router.put(
+router.patch(
   "/facility/:id",
   authValidation(USER_ROLES.admin),
   requestValidator(FacilityValidation.UpdateFacilityValidationSchema),
