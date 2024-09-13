@@ -183,10 +183,32 @@ const checkAvailability = async (
   }
 };
 
+
+const getASingleBookingByUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await BookingService.getASingleBookingByUserFromDB(id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Booking retrieve successfully by user",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const BookingController = {
   createBooking,
   getAllBooking,
   getAllBookingByUser,
   cancelABooking,
   checkAvailability,
+  getASingleBookingByUser
 };

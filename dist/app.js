@@ -12,16 +12,20 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const auth_routes_1 = require("./app/modules/auth/auth.routes");
 const facility_routes_1 = require("./app/modules/facility/facility.routes");
 const bookings_routes_1 = require("./app/modules/bookings/bookings.routes");
+const payment_routes_1 = require("./app/modules/payment/payment.routes");
 const app = (0, express_1.default)();
 // parsers
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: ["http://localhost:5173", "https://playtime-pro.vercel.app", "http://localhost:4173"], credentials: true
+}));
 app.use((0, cookie_parser_1.default)());
 // application routes
 app.use("/api", user_routes_1.UserRoutes);
 app.use("/api", auth_routes_1.LoginRoute);
 app.use("/api", facility_routes_1.FacilityRoutes);
-app.use("/api", bookings_routes_1.BookingsRouter);
+app.use("/api", bookings_routes_1.BookingsRoutes);
+app.use("/api/payment", payment_routes_1.paymentRoutes);
 // test route
 app.get("/", (req, res) => {
     res.send("Server running");

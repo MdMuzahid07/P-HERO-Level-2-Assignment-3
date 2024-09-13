@@ -172,10 +172,36 @@ const checkAvailabilityFromDB = async (date: any, facilityId: string) => {
   return availableSlots;
 };
 
+const getASingleBookingByUserFromDB = async (id: string) => {
+
+  const response = await BookingModel.findById(id).populate({
+    path: "facility",
+    select: "-__v -createdAt -updatedAt"
+  })
+    .populate({
+      path: "user"
+    });
+
+  /***
+  * converting array of objects to object and making it also solid js object using toObject() method  because we are getting mongodb data
+  * ***/
+  const result = response?.toObject() as Partial<TBookings>;
+
+  // removing some property from object by looping them
+  if (result) {
+    delete result.__v;
+    delete result.createdAt;
+    delete result.updatedAt;
+  };
+
+  return result;
+};
+
 export const BookingService = {
   createBookingIntoDB,
   getAllBookingsFromDB,
   getAllBookingsByUserFromDB,
   cancelABookingFromDB,
   checkAvailabilityFromDB,
+  getASingleBookingByUserFromDB
 };

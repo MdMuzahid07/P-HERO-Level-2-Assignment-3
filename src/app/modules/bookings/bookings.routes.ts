@@ -25,6 +25,11 @@ router.get(
   authValidation(USER_ROLES.user),
   BookingController.getAllBookingByUser,
 );
+router.get(
+  "/bookings/user/:id",
+  authValidation(USER_ROLES.user),
+  BookingController.getASingleBookingByUser,
+);
 
 router.delete(
   "/bookings/:id",

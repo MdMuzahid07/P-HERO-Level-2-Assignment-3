@@ -14,7 +14,7 @@ const app: Application = express();
 // parsers
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://playtime-pro.vercel.app"], credentials: true
+  origin: ["http://localhost:5173", "https://playtime-pro.vercel.app", "http://localhost:4173"], credentials: true
 }));
 app.use(cookieParser());
 
