@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import { NextFunction, Request, Response } from "express";
 import { AuthServices } from "./auth.service";
 import config from "../../config";
+import sendResponse from "../../utils/send.response";
 
 const LoginUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -27,19 +28,19 @@ const LoginUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const refreshToken = async (
+const refreshTokenController = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
     const { refreshToken } = req.cookies;
-    const result = await AuthServices.refreshToken(refreshToken);
+    const result = await AuthServices.refreshTokenService(refreshToken);
 
-    res.status(httpStatus.OK).json({
+    sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
-      message: "User logged in successfully",
+      message: "token created successfully",
       data: result,
     });
   } catch (error) {
@@ -49,5 +50,5 @@ const refreshToken = async (
 
 export const AuthController = {
   LoginUser,
-  refreshToken,
+  refreshTokenController,
 };

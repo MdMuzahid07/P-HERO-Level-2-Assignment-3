@@ -72,7 +72,7 @@ const LoginUser = async (payload: TLogin) => {
   };
 };
 
-const refreshToken = async (token: string) => {
+const refreshTokenService = async (token: string) => {
   const decoded = jwt.verify(
     token,
     config.jwt_refresh_token_secret_key as string,
@@ -111,5 +111,5 @@ const refreshToken = async (token: string) => {
 
 export const AuthServices = {
   LoginUser,
-  refreshToken,
+  refreshTokenService,
 };
