@@ -19,5 +19,8 @@ exports.default = {
     jwt_refresh_token_expires_in: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN,
     aamarpay_store_id: process.env.STORE_ID,
     aamarpay_signature_key: process.env.SIGNATURE_KEY,
-    aamarpay_payment_url: process.env.PAYMENT_URL
+    aamarpay_payment_url: process.env.PAYMENT_URL,
+    cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
+    cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloudinary_cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
 };
